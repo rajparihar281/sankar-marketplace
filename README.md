@@ -157,16 +157,28 @@ flutter analyze
 ```
 
 ### Building the APK
-To generate a debug APK:
-```bash
-flutter build apk --debug
-```
-The output file is generated at `build/app/outputs/flutter-apk/app-debug.apk`.
 
-To generate a release APK:
-```bash
-flutter build apk --release
-```
+To generate optimized, production-ready release APKs:
+
+1. Architecture-specific release APKs (recommended for minimal size):
+   ```bash
+   flutter build apk --split-per-abi
+   ```
+   Outputs:
+   - `build/app/outputs/flutter-apk/app-arm64-v8a-release.apk` (~18 MB, recommended for modern phones including Samsung Galaxy A03s)
+   - `build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk` (~15 MB, for 32-bit devices)
+
+2. Universal release APK (compatible across all Android architectures):
+   ```bash
+   flutter build apk --release
+   ```
+   Output: `build/app/outputs/flutter-apk/app-release.apk` (~51 MB)
+
+3. Debug APK:
+   ```bash
+   flutter build apk --debug
+   ```
+   Output: `build/app/outputs/flutter-apk/app-debug.apk` (~164 MB, contains unstripped JIT binaries and debug symbols)
 
 ## Dependencies
 
